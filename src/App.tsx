@@ -922,7 +922,7 @@ function UsersTab({ toast }) {
   async function addUser(){
     if(!form.nom||!form.email||!form.password){alert("Tous les champs requis.");return;}
     const {error}=await supabase.from("users").insert(form);
-    if(error){alert("Email déjà utilisé.");return;}
+    if(error){alert("Ereur: " +error .message);return;}
     toast("Utilisateur ajouté !"); setShowAdd(false); setForm({nom:"",email:"",password:"",role:"user",cssb:""});
     const {data}=await supabase.from("users").select("*").order("created_at");
     setUsers(data||[]);
